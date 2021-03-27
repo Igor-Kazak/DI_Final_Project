@@ -1,45 +1,25 @@
-import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import 'tachyons';
-import Home from './components/Home';
-import About from './components/About';
-import Project from './components/Project';
-import NavBar from './components/NavBar';
-import SignIn from './components/SignIn';
-import Test from './components/Test';
-import Results from './components/Results';
-import { Route, Switch, Redirect } from 'react-router-dom';
 
-class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
-
-  componentDidMount() {
-  }
-
-  render() {
-
-    return (
-      <React.Fragment>
-        <NavBar />
-        <Switch>
-          <Route path='/' exact><Home /></Route>
-          <Route path='/about' render={() => <About />} />
-          <Route path='/project' children={<Project />} />
-          <Route path='/signin' children={<SignIn />} />
-          <Route path='/signout' render={() => <Redirect to='/' />} />
-          <Route path='/test' children={<Test />} />
-          <Route path='/results' children={<Results />} />
-          <Route ><h3 className="tc mt-5">404 <br/> PAGE NOT FOUND!</h3></Route>
-        </Switch>
-      </React.Fragment>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          PPL TEST.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
