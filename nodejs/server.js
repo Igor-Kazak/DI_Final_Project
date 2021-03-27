@@ -11,18 +11,16 @@ app.use(cors());
 app.use(bp.urlencoded({ extended: false }))
 app.use(bp.json())
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`app is running on port ${process.env.PORT}`);
-})
-
-app.use(express.static(__dirname + '/public'));
+app.listen(5000, () => console.log('-> Listening on port 5000'));
 
 const db = knex({
     client: 'pg',
     connection: {
-   connectionString: process.env.DATABASE_URL,
-   ssl: { rejectUnauthorized: false }
-}
+        host: '127.0.0.1',
+        user: 'postgres',
+        password: '1',
+        database: 'ppltest'
+    }
 });
 app.set("db", db);
 
