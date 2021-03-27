@@ -32,7 +32,7 @@ const Project = () => {
                             <p>PPL test is the <strong>Final project</strong> made during Full Stack Coding Bootcamp
                             in <a href="https://developers.institute/en/" target="_blanc"
                             style={{textDecoration:"none"}}>Developers Institute</a>.<br />
-                            PPL test consist of two parts: <strong>back-end</strong> and <strong>front-end</strong>.</p>
+                            PPL test consists of two parts: <strong>back-end</strong> and <strong>front-end</strong>.</p>
                             <div className="row gx-5 mb-3">
                                 <div className="col">
                                     Back-end part based on:
