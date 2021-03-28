@@ -20,12 +20,12 @@ class Results extends React.Component {
     componentDidMount() {
         const { signedIn, user, afterTest } = this.props;
         if (signedIn) {
-            fetch('https://ppltest.herokuapp.com/getResult', {
+            fetch('http://localhost:5000/getResult', {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: user[0].username, quantity: 20 })
+                body: JSON.stringify({ username: user[0]?.username, quantity: 20 })
             })
                 .then(res => res.json())
                 .then(data => {
@@ -50,7 +50,36 @@ class Results extends React.Component {
                 counter++;
             }
         }
-        this.setState({ rating: counter })
+        this.setState({ rating: counter });
+        this.emailResults();
+    }
+
+    emailResults = () => {
+        let { user } = this.props;
+        let { result, rating, testTime } = this.state;
+        fetch('http://localhost:5000/email', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                firstname: user[0]?.firstname, 
+                lastname: user[0]?.lastname,
+                email: user[0]?.email,
+                time: parseInt(testTime / 60) +' min '+ (testTime % 60) + ' sec',
+                correct: rating,
+                wrong: result.length - rating,
+                percent: ((rating / result.length) * 100).toFixed(2),
+                status: ((rating / result.length) >= 0.75) && ((testTime / 60) < 30) ? 'passed' : 'not passed' 
+             })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 
     markWrong = (event) => {

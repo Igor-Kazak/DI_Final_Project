@@ -8,7 +8,8 @@ const bp = require('body-parser');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
-const port = process.env.PORT || 3000;
+const nodemailer = require('nodemailer');
+const port = process.env.PORT || 5000;
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(__dirname));
@@ -257,3 +258,59 @@ function createRusultsTable(username) {
         }
     });
 }
+
+//-------------------------------------------------------
+
+let transporter = nodemailer.createTransport({
+    host: "smtp.mail.ru",
+    port: 465,
+    secure: true,
+    auth: {
+        user: "ppl.test.final.project@mail.ru",
+        pass: "project_2021"
+    }
+});
+
+transporter.verify(function (error, success) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("-> Mail server is ready to take messages!");
+    }
+});
+
+app.post('/email', (req, res, next) => {
+
+    let {firstname, lastname, email, time, correct, wrong, percent, status} = req.body;
+    let text = `${firstname} ${lastname}, you test results: 
+    Status: ${status}; Total questions: ${correct-(-wrong)}; Percentage: ${percent}%;
+    Correct answers: ${correct}; Wrong answers: ${wrong}; Test duration: ${time};`;
+    let html = `<p>${firstname} ${lastname}, you test results: </p>
+    <p>Status: <strong>${status}</strong> <br> Total questions: ${correct-(-wrong)} <br> Percentage: ${percent}% <br>
+    Correct answers: ${correct} <br> Wrong answers: ${wrong} <br> Test duration: ${time} <br>
+    <a href='https://ppltest.herokuapp.com/'>ppltest.herokuapp.com</a>`;
+
+    let mail = {
+        from: '"PPL test" <ppl.test.final.project@mail.ru>',
+        to: email,
+        subject: `${firstname}, your test results`,
+        text: text,
+        html: html
+    };
+
+    transporter.sendMail(mail, (err, data) => {
+        if (err) {
+            console.log("-> Fail to send results to " + email);
+            res.json({
+                status: 'fail'
+            })
+        } else {
+            console.log("-> Results has been sent to " + email);
+            res.json({
+                status: 'success'
+            })
+        }
+    })
+})
+
+//-------------------------------------------------------
