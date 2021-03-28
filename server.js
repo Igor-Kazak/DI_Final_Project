@@ -187,7 +187,7 @@ app.post('/getResult', function (req, res) {
         .limit(quantity).offset(0)
         .then(data => {
             res.send(data);
-            console.log('-> Results were sent');
+            console.log('-> Results were sent back');
         })
         .catch(err => {
             console.log('-> ' + err.message)
