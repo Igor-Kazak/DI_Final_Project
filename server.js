@@ -81,7 +81,7 @@ app.post('/login', function (req, res) {
             if (data.length > 0) {
                 if (bcrypt.compareSync(req.body.password, data[0].password)) {
                     db
-                        .select('firstname', 'lastname', 'username').from('userlist')
+                        .select('firstname', 'lastname', 'username', 'email').from('userlist')
                         .where('username', req.body.username)
                         .then(data => {
                             res.send(data);
@@ -134,7 +134,8 @@ app.post('/register', function (req, res) {
                         res.send({
                             firstname: newuser.firstname,
                             lastname: newuser.lastname,
-                            username: newuser.username
+                            username: newuser.username,
+                            email: newuser.email,
                         })
                     })
                     .catch(err => {
