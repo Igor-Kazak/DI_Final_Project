@@ -75,7 +75,7 @@ class Results extends React.Component {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('email to user:' + data?.status);
+                //console.log('email to user:' + data?.status);
             })
             .catch(e => {
                 console.log(e);
