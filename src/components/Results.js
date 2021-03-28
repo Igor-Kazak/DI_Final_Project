@@ -20,7 +20,7 @@ class Results extends React.Component {
     componentDidMount() {
         const { signedIn, user, afterTest } = this.props;
         if (signedIn) {
-            fetch('http://localhost:5000/getResult', {
+            fetch('https://ppltest.herokuapp.com/getResult', {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',

@@ -15,7 +15,7 @@ export const handleSignIn = (value) => {
 }
 
 export const getAsyncQuestions = (value) => (dispatch) => {
-  fetch('http://localhost:5000/getQuestions', {
+  fetch('https://ppltest.herokuapp.com/getQuestions', {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -36,7 +36,7 @@ export const getAsyncQuestions = (value) => (dispatch) => {
 }
 
 export const userAsyncLogin = (user) => (dispatch) => {
-  fetch('http://localhost:5000/login', {
+  fetch('https://ppltest.herokuapp.com/login', {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -57,7 +57,7 @@ export const userAsyncLogin = (user) => (dispatch) => {
 }
 
 export const userAsyncRegister = (newUser) => (dispatch) => {
-  fetch('http://localhost:5000/register', {
+  fetch('https://ppltest.herokuapp.com/register', {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -92,7 +92,7 @@ export const incrementQuestion = () => {
 }
 
 export const userAsyncAnswer = (ticket) => (dispatch) => {
-  fetch('http://localhost:5000/sendAnswer', {
+  fetch('https://ppltest.herokuapp.com/sendAnswer', {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
