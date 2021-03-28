@@ -20,7 +20,7 @@ class Results extends React.Component {
     componentDidMount() {
         const { signedIn, user, afterTest } = this.props;
         if (signedIn) {
-            fetch('http://localhost:5000/getResult', {
+            fetch('https://ppltest.herokuapp.com/getResult', {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',
@@ -57,7 +57,7 @@ class Results extends React.Component {
     emailResults = () => {
         let { user } = this.props;
         let { result, rating, testTime } = this.state;
-        fetch('http://localhost:5000/email', {
+        fetch('https://ppltest.herokuapp.com/email', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -75,7 +75,7 @@ class Results extends React.Component {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
             })
             .catch(e => {
                 console.log(e);
