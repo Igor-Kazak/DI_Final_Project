@@ -68,7 +68,7 @@ class SignIn extends React.Component {
         let firstname = document.getElementById('firstname').value;
         let email = document.getElementById('email').value;
         if (username !== '' && password !== '' && lastname !== '' && firstname !== '' && email !== '') {
-            if (email.indexOf('@') === -1) {
+            if (email.indexOf('@') === -1 || email.indexOf('.') === -1 || email.length < 6) {
                 document.getElementById('registermessage').textContent = 'Enter correct e-mail!';
                 setTimeout(() => { document.getElementById('registermessage').textContent = '' }, 3000);
             }
