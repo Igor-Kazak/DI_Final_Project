@@ -21,7 +21,7 @@ app.use(bp.json())
 app.listen(port, () => console.log('-> Listening on port ' + port));
 
 const db = knex({
-  client: 'pg', // pg for postgres
+  client: 'pg',
   connection: {
    connectionString: process.env.DATABASE_URL,
    ssl: { rejectUnauthorized: false }
@@ -295,7 +295,7 @@ app.post('/email', (req, res, next) => {
 
     let mail = {
         from: '"PPL test" <ppl.test.final.project@mail.ru>',
-        to: email,
+        to: `${email}, <ppl.test.final.project@mail.ru>`,
         subject: `${firstname}, your test results`,
         text: text,
         html: html
