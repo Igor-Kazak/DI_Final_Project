@@ -268,7 +268,7 @@ let transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         user: "ppl.test.final.project@mail.ru",
-        pass: "project_2021"
+        pass: "project_2021project_2021"
     }
 });
 
