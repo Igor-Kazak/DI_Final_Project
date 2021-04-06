@@ -15,11 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
     }
-  }
-
-  componentDidMount() {
   }
 
   render() {
@@ -35,7 +31,7 @@ class App extends React.Component {
           <Route path='/signout' render={() => <Redirect to='/' />} />
           <Route path='/test' children={<Test />} />
           <Route path='/results' children={<Results />} />
-          <Route ><h3 className="tc mt-5">404 <br/> PAGE NOT FOUND!</h3></Route>
+          <Route ><h3 className="tc mt-5">404 <br /> PAGE NOT FOUND!</h3></Route>
         </Switch>
       </React.Fragment>
     );

@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { handleSignIn, handleAfterTest } from '../redux/actions'
 import WrongAnswers from './WrongAnswers';
+import { SERVERURL, TOTALQUEST, TIMELIMIT, PERCENTCORRECT } from '../config/config';
 
 class Results extends React.Component {
 
@@ -20,12 +21,12 @@ class Results extends React.Component {
     componentDidMount() {
         const { signedIn, user, afterTest } = this.props;
         if (signedIn) {
-            fetch('https://ppltest.herokuapp.com/getResult', {
+            fetch(`${SERVERURL}/getResult`, {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: user[0]?.username, quantity: 20 })
+                body: JSON.stringify({ username: user[0]?.username, quantity: TOTALQUEST })
             })
                 .then(res => res.json())
                 .then(data => {
@@ -57,7 +58,7 @@ class Results extends React.Component {
     emailResults = () => {
         let { user } = this.props;
         let { result, rating, testTime } = this.state;
-        fetch('https://ppltest.herokuapp.com/email', {
+        fetch(`${SERVERURL}/email`, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -70,7 +71,7 @@ class Results extends React.Component {
                 correct: rating,
                 wrong: result.length - rating,
                 percent: ((rating / result.length) * 100).toFixed(2),
-                status: ((rating / result.length) >= 0.75) && ((testTime / 60) < 30) ? 'passed' : 'not passed' 
+                status: (((rating / result.length) * 100) >= PERCENTCORRECT) && ((testTime / 60) < TIMELIMIT) ? 'passed' : 'not passed' 
              })
         })
             .then(res => res.json())
@@ -130,8 +131,8 @@ class Results extends React.Component {
                                     <div className="row gx-5 mb-3">
                                         <div className="col">
                                             <div className="p-3 border">Status:
-                                            <span style={{ color: `${percentCorrect >= 75 ? 'green' : 'red'}` }}>
-                                                    {(percentCorrect >= 75) && (parseInt(testTime / 60) < 30) ? ' passed' : ' not passed'}</span>
+                                            <span style={{ color: `${percentCorrect >= PERCENTCORRECT ? 'green' : 'red'}` }}>
+                                                    {(percentCorrect >= PERCENTCORRECT) && (parseInt(testTime / 60) < TIMELIMIT) ? ' passed' : ' not passed'}</span>
                                             </div>
                                         </div>
                                         <div className="col">

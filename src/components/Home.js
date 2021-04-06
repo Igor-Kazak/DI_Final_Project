@@ -5,6 +5,7 @@ import img4 from '../img/airplane.png'
 import img5 from '../img/helicopter.png'
 import img4c from '../img/airplane_c.png'
 import img5c from '../img/helicopter_c.png'
+import { TIMELIMIT, TOTALQUEST, PERCENTCORRECT } from '../config/config';
 
 const Home = (props) => {
 
@@ -48,14 +49,14 @@ const Home = (props) => {
                                 <div className="row gx-5 mb-0">
                                     <div className="col tc">
                                         <img src={img4} width="200px" alt='' id="4"
-                                        onMouseEnter={colourImg} onMouseLeave={greyImg}/>
+                                            onMouseEnter={colourImg} onMouseLeave={greyImg} />
                                     </div>
                                     <div className="col tc">
                                         <img src={img5} width="200px" alt='' id="5"
-                                        onMouseEnter={colourImg} onMouseLeave={greyImg}/>
+                                            onMouseEnter={colourImg} onMouseLeave={greyImg} />
                                     </div>
                                 </div>
-                                <p>You have 20 random questions and 30 minutes. Answer correctly at least 75% of the questions to pass the test.</p>
+                                <p>You have {TOTALQUEST} random questions and {TIMELIMIT} minutes. Answer correctly at least {PERCENTCORRECT}% of the questions to pass the test.</p>
                                 <p>Please Log in or register for test.</p>
                                 <Link to="/signin" className="btn btn-sm btn-outline-secondary">Sign in</Link>
                             </div>

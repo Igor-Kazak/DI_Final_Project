@@ -1,3 +1,4 @@
+import { SERVERURL, TOTALQUEST } from '../config/config';
 export const SIGNIN = 'SIGNIN';
 export const GETQUESTIONS = 'GETQUESTIONS';
 export const LOGINATTEMPT = 'LOGINATTEMPT';
@@ -15,12 +16,12 @@ export const handleSignIn = (value) => {
 }
 
 export const getAsyncQuestions = (value) => (dispatch) => {
-  fetch('https://ppltest.herokuapp.com/getQuestions', {
+  fetch(`${SERVERURL}/getQuestions`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ typeOfTest: value, quantity: 20 })
+    body: JSON.stringify({ typeOfTest: value, quantity: TOTALQUEST })
   })
     .then(res => res.json())
     .then(data => {
@@ -36,7 +37,7 @@ export const getAsyncQuestions = (value) => (dispatch) => {
 }
 
 export const userAsyncLogin = (user) => (dispatch) => {
-  fetch('https://ppltest.herokuapp.com/login', {
+  fetch(`${SERVERURL}/login`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -57,7 +58,7 @@ export const userAsyncLogin = (user) => (dispatch) => {
 }
 
 export const userAsyncRegister = (newUser) => (dispatch) => {
-  fetch('https://ppltest.herokuapp.com/register', {
+  fetch(`${SERVERURL}/register`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -92,7 +93,7 @@ export const incrementQuestion = () => {
 }
 
 export const userAsyncAnswer = (ticket) => (dispatch) => {
-  fetch('https://ppltest.herokuapp.com/sendAnswer', {
+  fetch(`${SERVERURL}/sendAnswer`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',

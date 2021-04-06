@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import { userAsyncAnswer, incrementQuestion } from '../redux/actions';
+import { TIMELIMIT } from '../config/config';
 
 const Test = (props) => {
 
@@ -49,7 +50,7 @@ const Test = (props) => {
             <>
                 <div className="container px-5 pt-1">
                     <div className="mb-2 tr"
-                        style={{ color: (min < 30 ? 'black' : "red") }}>{min}:{sec}
+                        style={{ color: (min < TIMELIMIT ? 'black' : "red") }}>{min}:{sec}
                     </div>
                     <div className="col progress mb-3">
                         <div className="progress-bar" role="progressbar"

@@ -7,10 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { reducer } from './redux/reducers';
-import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
+//import { logger } from 'redux-logger';  // only for debugging
 
-const store = createStore(reducer, applyMiddleware(thunk));  //(thunk, logger)
+const store = createStore(reducer, applyMiddleware(thunk));  //(thunk, logger) - only for debugging
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +23,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// Log results (for example: reportWebVitals(console.log))
-// Learn more: https://bit.ly/CRA-vitals
+// reportWebVitals(console.log)) https://bit.ly/CRA-vitals
 reportWebVitals();

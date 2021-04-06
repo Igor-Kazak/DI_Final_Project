@@ -29,9 +29,6 @@ class SignIn extends React.Component {
         }
     }
 
-    componentDidMount() {
-    }
-
     componentDidUpdate = () => {
         setTimeout(() => this.props.clearMsg(), 3000);
     }
