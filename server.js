@@ -288,10 +288,10 @@ transporter.verify(function (error, success) {
 app.post('/email', (req, res, next) => {
 
   let { firstname, lastname, email, time, correct, wrong, percent, status } = req.body;
-  let text = `${firstname} ${lastname}, you test results: 
+  let text = `${firstname} ${lastname}, your test results: 
   Status: ${status}; Total questions: ${correct - (-wrong)}; Percentage: ${percent}%;
   Correct answers: ${correct}; Wrong answers: ${wrong}; Test duration: ${time};`;
-  let html = `<p>${firstname} ${lastname}, you test results: </p>
+  let html = `<p>${firstname} ${lastname}, your test results: </p>
   <p>Status: <strong>${status}</strong> <br> Total questions: ${correct - (-wrong)} <br> Percentage: ${percent}% <br>
   Correct answers: ${correct} <br> Wrong answers: ${wrong} <br> Test duration: ${time} <br>
   <a href='https://ppltest.herokuapp.com/'>ppltest.herokuapp.com</a>`;
