@@ -78,33 +78,35 @@ class Allresults extends React.Component {
             if (resultToShow.length !== 0) {
                 return (
                     <>
-                        <div className="container px-5 py-3 border bg-light">
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">№</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Time</th>
-                                        <th scope="col">Duration</th>
-                                        <th scope="col">Correct</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {resultToShow.map((item, i) => {
-                                        return (
-                                            <tr key={i} className={item?.status === "passed" ? "table-success" : "table-danger"}>
-                                                <th scope="row">{i - (-1)}</th>
-                                                <td>{item?.date}</td>
-                                                <td>{item?.time}</td>
-                                                <td>{item?.duration}</td>
-                                                <td>{item?.percent}</td>
-                                                <td>{item?.status}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
+                        <div className="container px-5 pt-3">
+                            <div className="p-3 px-4 border bg-light">
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">№</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Duration</th>
+                                            <th scope="col">Correct</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {resultToShow.map((item, i) => {
+                                            return (
+                                                <tr key={i} className={item?.status === "passed" ? "table-success" : "table-danger"}>
+                                                    <th scope="row">{i - (-1)}</th>
+                                                    <td>{item?.date}</td>
+                                                    <td>{item?.time}</td>
+                                                    <td>{item?.duration}</td>
+                                                    <td>{item?.percent}</td>
+                                                    <td>{item?.status}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </>
                 )
