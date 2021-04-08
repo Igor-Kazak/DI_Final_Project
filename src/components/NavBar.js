@@ -4,7 +4,7 @@ import { handleSignIn } from '../redux/actions'
 
 const NavBar = (props) => {
 
-    const { signedIn, signInSwitch, user } = props;
+    const { signedIn, signInSwitch, user, numQuestion } = props;
 
     return (
         <nav className="navbar navbar-expand navbar-light bg-light border-bottom mb-3">
@@ -21,7 +21,8 @@ const NavBar = (props) => {
                         </li>
                     </ul>
                     <span className="navbar-text">
-                    <span className="mx-3">{user[0]?.firstname}</span>
+                        <Link to='/allresults' className="link mx-3" 
+                        style={numQuestion!==0 ? {pointerEvents:"none"} : {fontWeight:"bold"}}>{user[0]?.firstname}</Link>
                         <Link to={signedIn ? '/signout' : '/signin'} className="btn btn-sm btn-outline-secondary"
                             onClick={() => signedIn ? signInSwitch(false) : null}>
                             {signedIn ? 'Sign out' : 'Sign in'}</Link>
@@ -35,7 +36,8 @@ const NavBar = (props) => {
 const mapStateToProps = (state) => {
     return {
         signedIn: state.reducerOne.signedIn,
-        user: state.reducerOne.currentUser
+        user: state.reducerOne.currentUser,
+        numQuestion: state.reducerOne.currentQuestion,
     }
 }
 
