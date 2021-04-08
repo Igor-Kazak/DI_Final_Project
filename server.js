@@ -198,6 +198,24 @@ app.post('/getResult', function (req, res) {
 
 //-------------------------------------------------------
 
+app.post('/getAllResult', function (req, res) {
+    const { username } = req.body;
+    console.log('-> All results request from user: ' + username);
+    db
+        .select('question', 'userAnswer', 'correctAnswer', 'date')
+        .from('results_' + username)
+        .orderBy('id', 'desc')
+        .then(data => {
+            res.send(data);
+            console.log('-> All results were sent back');
+        })
+        .catch(err => {
+            console.log('-> ' + err.message)
+        })
+});
+
+//-------------------------------------------------------
+
 function sortRandom(num) {
   if (num == 6) {
     let rnd = Math.floor(Math.random() * 6);

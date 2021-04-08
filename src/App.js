@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import SignIn from './components/SignIn';
 import Test from './components/Test';
 import Results from './components/Results';
+import Allresults from './components/Allresults';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 class App extends React.Component {
@@ -31,6 +32,7 @@ class App extends React.Component {
           <Route path='/signout' render={() => <Redirect to='/' />} />
           <Route path='/test' children={<Test />} />
           <Route path='/results' children={<Results />} />
+          <Route path='/allresults' children={<Allresults />} />
           <Route ><h3 className="tc mt-5">404 <br /> PAGE NOT FOUND!</h3></Route>
         </Switch>
       </React.Fragment>
