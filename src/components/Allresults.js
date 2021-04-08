@@ -113,9 +113,11 @@ class Allresults extends React.Component {
             }
             else {
                 return (
-                    <div className="container p-5 border bg-light tc">
-                        {user[0]?.firstname}, you don't have any test results yet... <br/>
-                        Please, pass the test.
+                    <div className="container px-5 pt-3">
+                        <div className="p-5 px-4 border bg-light tc">
+                            {user[0]?.firstname}, you don't have any test results yet... <br />
+                            Please, pass the test.
+                    </div>
                     </div>
                 )
             }
