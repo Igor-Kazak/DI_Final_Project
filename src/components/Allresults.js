@@ -78,7 +78,7 @@ class Allresults extends React.Component {
             if (resultToShow.length !== 0) {
                 return (
                     <>
-                        <div className="container px-5 pt-3 border bg-light">
+                        <div className="container px-5 py-3 border bg-light">
                             <table className="table">
                                 <thead>
                                     <tr>
