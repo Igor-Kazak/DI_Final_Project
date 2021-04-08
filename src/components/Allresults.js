@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import React from 'react';
-import { handleSignIn, handleAfterTest } from '../redux/actions'
 import { SERVERURL, TOTALQUEST, TIMELIMIT, PERCENTCORRECT } from '../config/config';
 
 class TestResult {
@@ -64,86 +63,58 @@ class Allresults extends React.Component {
             let date = ('0' + start.getDate()).slice(-2) + '.' + ('0' + (start.getMonth() - (-1))).slice(-2) + '.' + start.getFullYear();
             let time = ('0' + start.getHours()).slice(-2) + ':' + ('0' + start.getMinutes()).slice(-2);
             let percent = ((correct / TOTALQUEST) * 100).toFixed(2) + '%';
-            let status = percent >= PERCENTCORRECT && ( testTime / 60 ) < TIMELIMIT ? 'passed' : 'not passed';
+            let status = percent >= PERCENTCORRECT && (testTime / 60) < TIMELIMIT ? 'passed' : 'not passed';
             resultToShow.push(new TestResult(date, time, duration, status, percent));
         }
-        this.setState({resultToShow : resultToShow});
+        this.setState({ resultToShow: resultToShow });
     }
 
     render() {
 
-        const { signedIn } = this.props;
+        const { signedIn, user } = this.props;
         const { resultToShow } = this.state;
 
         if (signedIn) {
-            if (resultToShow !== 0) {
+            if (resultToShow.length !== 0) {
                 return (
                     <>
                         <div className="container px-5 pt-3 border bg-light">
-                        <table className="table">
-  <thead>
-    <tr>
-      <th scope="col">№</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Duration</th>
-      <th scope="col">Correct</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-  {resultToShow.map((item, i) => {
-    return (
-        <tr key={i} className={item?.status === "passed"? "table-success" : "table-danger"}>
-        <th scope="row">{i-(-1)}</th>
-        <td>{item?.date}</td>
-        <td>{item?.time}</td>
-        <td>{item?.duration}</td>
-        <td>{item?.percent}</td>
-        <td>{item?.status}</td>
-      </tr>
-    )
-  })}
-  </tbody>
-</table>
-                            {/* <div className="row gx-5 mb-3">
-                                <div className="col">
-                                    <div className="p-3 px-4 border bg-light">
-                                        {resultToShow.map((item, i) => {
-                                            return (
-                                                <div className="row gx-5 mb-3" key={i}>
-                                                <div className="col ">
-                                                    {item?.date}
-                                                    </div>
-                                                    <div className="col ">
-                                                    {item?.time}
-                                                    </div>
-                                                    <div className="col ">
-                                                    {item?.duration}
-                                                    </div>
-                                                    <div className="col ">
-                                                    {item?.percent}
-                                                    
-                                                </div>
-                                                <div className="col ">
-                                                <span style={item?.status === "passed"? {color:"green"} : {color:"red"}}>{item?.status} </span>
-                                                
-                                                </div>
-                                                </div>)
-                                        })
-                                        }
-                                    </div>
-                                </div>
-                            </div> */}
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">№</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Correct</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {resultToShow.map((item, i) => {
+                                        return (
+                                            <tr key={i} className={item?.status === "passed" ? "table-success" : "table-danger"}>
+                                                <th scope="row">{i - (-1)}</th>
+                                                <td>{item?.date}</td>
+                                                <td>{item?.time}</td>
+                                                <td>{item?.duration}</td>
+                                                <td>{item?.percent}</td>
+                                                <td>{item?.status}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
                         </div>
                     </>
                 )
             }
             else {
                 return (
-                    <>
-                    no test results
-                    </>
+                    <div className="container p-5 border bg-light tc">
+                        {user[0]?.firstname}, you don't have any test results yet... <br/>
+                        Please, pass the test.
+                    </div>
                 )
             }
         }
@@ -162,11 +133,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        signInSwitch: (value) => dispatch(handleSignIn(value)),
-        afterTest: () => dispatch(handleAfterTest()),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Allresults);
+export default connect(mapStateToProps, null)(Allresults);
