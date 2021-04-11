@@ -62,9 +62,9 @@ class Allresults extends React.Component {
             }
             let date = ('0' + start.getDate()).slice(-2) + '.' + ('0' + (start.getMonth() - (-1))).slice(-2) + '.' + start.getFullYear();
             let time = ('0' + start.getHours()).slice(-2) + ':' + ('0' + start.getMinutes()).slice(-2);
-            let percent = ((correct / TOTALQUEST) * 100).toFixed(2) + '%';
+            let percent = Math.round((correct / TOTALQUEST) * 10000) / 100;
             let status = percent >= PERCENTCORRECT && (testTime / 60) < TIMELIMIT ? 'passed' : 'not passed';
-            resultToShow.push(new TestResult(date, time, duration, status, percent));
+            resultToShow.push(new TestResult(date, time, duration, status, percent + '%'));
         }
         this.setState({ resultToShow: resultToShow });
     }
