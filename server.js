@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bp.urlencoded({ extended: false }))
 app.use(bp.json())
 
-app.listen(port, () => console.log('-> Listening on port ' + port));
+app.listen(port, () => console.log('\x1b[36m%s\x1b[0m','-> Listening on port ' + port));
 
 const db = knex({
   client: 'pg',
